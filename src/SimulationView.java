@@ -2,11 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * The type Simulation view.
+ */
 public class SimulationView extends JApplet
 {
+    /**
+     * The frame WIDTH.
+     */
     public static final int WIDTH = 800;
+    /**
+     * The frame HEIGHT.
+     */
     public static final int HEIGHT = 650;
-
+    
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main( String[] args )
     {
         JFrame frame = new JFrame();
@@ -18,19 +32,28 @@ public class SimulationView extends JApplet
         frame.pack();
         frame.setVisible( true );
     }
-
+    
+    /**
+     * Initializes the applet.
+     */
     public void init()
     {
         JPanel panel = new HairPanel();
         getContentPane().add( panel );
     }
-
+    
+    /**
+     * The type Hair panel.
+     */
     class HairPanel extends JPanel implements Runnable
     {
         private HairController hairController = new HairController(
                 new World(9.8, 30.0, 0.02, 15, 5),
-                ( SimulationView.WIDTH / 2 ) - 112, 10, 225, 250, 5000);
-
+                ( SimulationView.WIDTH / 2 ) - 112, 10, 225, 250, 500);
+    
+        /**
+         * Instantiates a new Hair panel.
+         */
         public HairPanel()
         {
             setPreferredSize( new Dimension( SimulationView.WIDTH, SimulationView.HEIGHT ) );
@@ -39,7 +62,12 @@ public class SimulationView extends JApplet
             Thread thread = new Thread( this );
             thread.start();
         }
-
+    
+        /**
+         * Draws on the frame panel
+         *
+         * @param g the drawing graphics component
+         */
         public void paintComponent( Graphics g )
         {
             Graphics2D g2D = ( Graphics2D ) g;
@@ -57,7 +85,10 @@ public class SimulationView extends JApplet
                 hair.drawHair( g2D );
             }
         }
-
+    
+        /**
+         * Runs the thread.
+         */
         public void run()
         {
             while( true )
