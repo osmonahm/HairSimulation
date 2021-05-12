@@ -47,7 +47,7 @@ public class HairController extends JApplet
             thread.start();
             
             // initializing hair objects with random anchors
-            hairs = new Hair[100];
+            hairs = new Hair[500];
             for( int i = 0; i < hairs.length; i++ )
             {
                 double[] randomCoordinates = randomCoordinates();
@@ -73,11 +73,11 @@ public class HairController extends JApplet
             RenderingHints rh = new RenderingHints( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
             rh.put( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
             g2D.setRenderingHints( rh );
-            g.setColor( Color.BLACK );
-            
+    
+            g2D.setColor( Color.BLACK );
             Ellipse2D head = new Ellipse2D.Double( headX, headY, headWidth, headHeight );
             g2D.draw( head );
-    
+            
             for( Hair hair : hairs ) hair.drawHair( g2D );
         }
         
