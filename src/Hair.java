@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Line2D;
 
-public class Hair
-{
+public class Hair {
     private double gravity;     // the gravitational force
     private double mass;        // the mass of the spring
     private double timeStep;    // pixels to skip
@@ -13,8 +12,7 @@ public class Hair
     Segment[] segments;
     int numOfSegments;
     
-    public Hair( double G, double M, double ts, double d, int K, double aX, double aY, int segNum )
-    {
+    public Hair(double G, double M, double ts, double d, int K, double aX, double aY, int segNum) {
         gravity = G;
         mass = M;
         timeStep = ts;
@@ -28,41 +26,44 @@ public class Hair
         setSegments();
     }
     
-    public void setSegments()
-    {
-        for( int i = 0; i < segments.length; i++ )
-        {
-            if( i == 0 )
-                segments[i] = new Segment( gravity, mass, timeStep, damping, k, anchorX, anchorY );
+    public void setSegments() {
+        for( int i = 0; i < segments.length; i++ ) {
+            if(i == 0)
+                segments[i] = new Segment(gravity, mass, timeStep, damping, k, anchorX, anchorY);
             else
-                segments[i] = new Segment( gravity, mass, timeStep, damping, k, segments[i-1].getPositionX(), segments[i-1].getPositionY() );
+                segments[i] = new Segment( gravity, mass, timeStep, damping, k,
+                        segments[i-1].getPositionX(), segments[i-1].getPositionY());
         }
     }
     
-    public void updateSegments()
-    {
-        for( int i = 0; i < segments.length; i++ )
-        {
-            if( i == 0 )
-                segments[i].update( null, segments[i+1] );
-            else
-                segments[i].update( segments[i-1], null );
+    public void updateSegments() {
+        for (int i = 0; i < segments.length; i++) {
+            if(i == 0) {
+                segments[i].update(null, segments[i+1]);
+            }
+            else {
+                segments[i].update(segments[i-1], null);
+            }
         }
     }
     
-    public void drawHair( Graphics2D g2D )
-    {
-        for( int i = 0; i < segments.length; i++ )
-        {
+    public void drawHair( Graphics2D g2D ) {
+        for (int i = 0; i < segments.length; i++) {
             updateSegments();
             Line2D line;
     
-            if( i == 0 )
-                line = new Line2D.Double( segments[i].getPositionX() + 10, segments[i].getPositionY(), anchorX + 10, anchorY + 25 );
-            else
-                line = new Line2D.Double( segments[i].getPositionX() + 10, segments[i].getPositionY(), segments[i-1].getPositionX() + 10, segments[i-1].getPositionY() );
-            
-            g2D.draw( line );
+            if (i == 0) {
+                line = new Line2D.Double( segments[i].getPositionX() + 10, segments[i].getPositionY(),
+                        anchorX + 10,
+                        anchorY + 25 );
+            } else {
+                line = new Line2D.Double( segments[i].getPositionX() + 10,
+                        segments[i].getPositionY(),
+                        segments[i-1].getPositionX() + 10,
+                        segments[i-1].getPositionY());
+            }
+
+            g2D.draw(line);
         }
     }
 }

@@ -1,5 +1,4 @@
-public class Segment
-{
+public class Segment {
     private double positionX;   // spring position x
     private double positionY;   // spring position y
     private double velocityX;   // spring velocity x
@@ -19,8 +18,7 @@ public class Segment
     private double forceX, forceY;                  // The net Force
     private double accelerationX, accelerationY;    // Acceleration
     
-    public Segment( double G, double M, double ts, double d, int K, double aX, double aY )
-    {
+    public Segment(double G, double M, double ts, double d, int K, double aX, double aY) {
         positionX = 150;
         positionY = 200;
         velocityX = 0.0;
@@ -35,60 +33,47 @@ public class Segment
         anchorY = aY;
     }
     
-    public void setDisplacement( Segment segment )
-    {
-        if( segment == null )
-        {
+    public void setDisplacement(Segment segment) {
+        if(segment == null) {
             displacementX = positionX - anchorX;
             displacementY = positionY - anchorY;
-        }
-        else
-        {
+        } else {
             displacementX = positionX - segment.positionX;
             displacementY = positionY - segment.positionY;
         }
     }
     
-    public void setSpringForce()
-    {
+    public void setSpringForce() {
         springForceX = -k * displacementX;
         springForceY = -k * displacementY;
     }
     
-    public void setDampingForce()
-    {
+    public void setDampingForce() {
         dampingForceX = damping * velocityX;
         dampingForceY = damping * velocityY;
     }
     
-    public void setForce( Segment segment )
-    {
-        if( segment == null )
-        {
+    public void setForce(Segment segment) {
+        if(segment == null) {
             forceX = springForceX - dampingForceX;
             forceY = springForceY + mass * gravity - dampingForceY;
-        }
-        else
-        {
+        } else {
             forceX = springForceX - dampingForceX - segment.springForceX + segment.dampingForceX;
             forceY = springForceY + mass * gravity - dampingForceY - segment.springForceX + segment.dampingForceX;
         }
     }
     
-    public void setAcceleration()
-    {
+    public void setAcceleration() {
         accelerationX = forceX / mass;
         accelerationY = forceY / mass;
     }
     
-    public void setVelocity()
-    {
+    public void setVelocity() {
         velocityX += accelerationX * timeStep;
         velocityY += accelerationY * timeStep;
     }
     
-    public void setPosition()
-    {
+    public void setPosition() {
         positionX += velocityX * timeStep;
         positionY += velocityY * timeStep;
     }
@@ -103,12 +88,11 @@ public class Segment
         return positionY;
     }
     
-    public void update( Segment prevSegment, Segment nextSegment )
-    {
-        setDisplacement( prevSegment );
+    public void update(Segment prevSegment, Segment nextSegment) {
+        setDisplacement(prevSegment);
         setSpringForce();
         setDampingForce();
-        setForce( nextSegment );
+        setForce(nextSegment);
         setAcceleration();
         setVelocity();
         setPosition();
