@@ -29,12 +29,7 @@ public class HairController extends JApplet
     class HairPanel extends JPanel implements Runnable
     {
         // initial settings
-        double gravity = 9.8;   // the gravitational force
-        double mass = 30.0;     // the mass of the spring
-        double timeStep = 0.02; // pixels to skip
-        double damping = 15;    // the damping coefficient
-        int k = 5;              // the spring constant - stiffness
-        
+        World world = new World(9.8, 30.0, 0.02, 15, 5);
         Hair[] hairs;
         
         // head settings
@@ -56,7 +51,7 @@ public class HairController extends JApplet
             for( int i = 0; i < hairs.length; i++ )
             {
                 double[] randomCoordinates = randomCoordinates();
-                hairs[i] = new Hair( gravity, mass, timeStep, damping, k, randomCoordinates[0], randomCoordinates[1], 7 );
+                hairs[i] = new Hair(world, randomCoordinates[0], randomCoordinates[1], 7 );
             }
         }
         
