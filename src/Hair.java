@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.util.Random;
 
 public class Hair
 {
@@ -12,6 +13,7 @@ public class Hair
     private int k;              // the spring constant - stiffness
     private double anchorX;     // the anchor/initial position x
     private double anchorY;     // the anchor/initial position y
+    private Color hairColor;    // the color of the hair
     
     public Hair( double G, double M, double ts, double d, int K, double aX, double aY, int segNum )
     {
@@ -22,6 +24,7 @@ public class Hair
         k = K;
         anchorX = aX;
         anchorY = aY;
+        hairColor = new Color( ( int ) getRandomNumber( 180, 200 ), ( int ) getRandomNumber( 80, 120 ), ( int ) getRandomNumber( 0, 20 ), 250 );
         
         numOfSegments = segNum;
         segments = new Segment[numOfSegments];
@@ -59,17 +62,20 @@ public class Hair
         {
             updateSegments();
             Line2D line;
+            g2D.setColor( hairColor );
             
             if( i == 0 )
-            {
                 line = new Line2D.Double( segments[i].getPositionX() + 10, segments[i].getPositionY(), anchorX + 10, anchorY + 25 );
-            }
             else
-            {
                 line = new Line2D.Double( segments[i].getPositionX() + 10, segments[i].getPositionY(), segments[i - 1].getPositionX() + 10, segments[i - 1].getPositionY() );
-            }
-            
+    
+    
             g2D.draw( line );
         }
+    }
+    
+    public double getRandomNumber( double min, double max )
+    {
+        return min + ( max - min ) * new Random().nextDouble();
     }
 }
