@@ -1,98 +1,106 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
-public class HairController extends JApplet
+public class HairController
 {
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 650;
-    
-    public static void main( String[] args )
-    {
-        JFrame frame = new JFrame();
-        frame.setTitle( "Hair Simulation" );
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        JApplet applet = new HairController();
-        applet.init();
-        frame.getContentPane().add( applet );
-        frame.pack();
-        frame.setVisible( true );
+    private World world;
+    private int headX;
+    private int headY;
+    private int headWidth;
+    private int headHeight;
+    private Hair[] hair;
+
+    public HairController(World world, int headX, int headY, int headWidth, int headHeight, int numberOfHair) {
+        this.world = world;
+        this.headX = headX;
+        this.headY = headY;
+        this.headWidth = headWidth;
+        this.headHeight = headHeight;
+
+        makeHair(numberOfHair);
     }
-    
-    public void init()
-    {
-        JPanel panel = new HairPanel();
-        getContentPane().add( panel );
+
+    public HairController(World world, int headX, int headY, int headWidth, int headHeight, Hair[] hair) {
+        this.world = world;
+        this.headX = headX;
+        this.headY = headY;
+        this.headWidth = headWidth;
+        this.headHeight = headHeight;
+        this.hair = hair;
     }
-    
-    class HairPanel extends JPanel implements Runnable
+
+    public Hair[] makeHair(int numberOfHair) {
+        // initializing hair objects with random anchors
+        this.hair = new Hair[numberOfHair];
+        for( int i = 0; i < hair.length; i++ )
+        {
+            double[] randomCoordinates = randomCoordinates();
+            this.hair[i] = new Hair(world, randomCoordinates[0], randomCoordinates[1], 7 );
+        }
+
+        return hair;
+    }
+
+    private double[] randomCoordinates()
     {
-        // initial settings
-        World world = new World(9.8, 30.0, 0.02, 15, 5);
-        Hair[] hairs;
+        double theta = getRandomNumber( 0, Math.PI * 2 );
+        double r = getRandomNumber( 0d, 1d );
+
+        double x = headWidth * Math.sqrt( r ) * Math.cos( theta ) / 2;
+        double y = ( headHeight * Math.sqrt( r ) * Math.sin( theta ) / 2 ) - 10;
+
+        return new double[]{ headX + ( headWidth / 2.0 ) * 0.95 + x, headY + ( headHeight / 2.0 ) * 0.95 + y };
+    }
         
-        // head settings
-        int headX = 200;
-        int headY = 10;
-        int headWidth = 400;
-        int headHeight = 400;
-        
-        public HairPanel()
-        {
-            setPreferredSize( new Dimension( HairController.WIDTH, HairController.HEIGHT ) );
-            setBackground( Color.white );
-            
-            Thread thread = new Thread( this );
-            thread.start();
-            
-            // initializing hair objects with random anchors
-            hairs = new Hair[500];
-            for( int i = 0; i < hairs.length; i++ )
-            {
-                double[] randomCoordinates = randomCoordinates();
-                hairs[i] = new Hair(world, randomCoordinates[0], randomCoordinates[1], 7 );
-            }
-        }
-        
-        private double[] randomCoordinates()
-        {
-            double theta = getRandomNumber( 0, Math.PI * 2 );
-            double r = getRandomNumber( 0d, 1d );
-            
-            double x = headWidth * Math.sqrt( r ) * Math.cos( theta ) / 2;
-            double y = ( headHeight * Math.sqrt( r ) * Math.sin( theta ) / 2 ) - 10;
-            
-            return new double[]{ headX + ( headWidth / 2.0 ) * 0.95 + x, headY + ( headHeight / 2.0 ) * 0.95 + y };
-        }
-        
-        public void paintComponent( Graphics g )
-        {
-            Graphics2D g2D = ( Graphics2D ) g;
-            super.paintComponent( g2D );
-            RenderingHints rh = new RenderingHints( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
-            rh.put( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
-            g2D.setRenderingHints( rh );
-    
-            g2D.setColor( Color.BLACK );
-            Ellipse2D head = new Ellipse2D.Double( headX, headY, headWidth, headHeight );
-            g2D.draw( head );
-            
-            for( Hair hair : hairs ) hair.drawHair( g2D );
-        }
-        
-        public void run()
-        {
-            while( true )
-            {
-                repaint();
-                //try { Thread.sleep( 1 ); } catch( InterruptedException ex ) {}
-            }
-        }
-        
-        public double getRandomNumber( double min, double max )
-        {
-            return min + ( max - min ) * new Random().nextDouble();
-        }
+    public double getRandomNumber( double min, double max )
+    {
+        return min + ( max - min ) * new Random().nextDouble();
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public int getHeadX() {
+        return headX;
+    }
+
+    public void setHeadX(int headX) {
+        this.headX = headX;
+    }
+
+    public int getHeadY() {
+        return headY;
+    }
+
+    public void setHeadY(int headY) {
+        this.headY = headY;
+    }
+
+    public int getHeadWidth() {
+        return headWidth;
+    }
+
+    public void setHeadWidth(int headWidth) {
+        this.headWidth = headWidth;
+    }
+
+    public int getHeadHeight() {
+        return headHeight;
+    }
+
+    public void setHeadHeight(int headHeight) {
+        this.headHeight = headHeight;
+    }
+
+    public Hair[] getHair() {
+        return hair;
+    }
+
+    public void setHair(Hair[] hair) {
+        this.hair = hair;
     }
 }

@@ -90,4 +90,132 @@ public class Segment {
         setVelocity();
         setPosition();
     }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public void setPositionX(double positionX) {
+        this.positionX = positionX;
+    }
+
+    public void setPositionY(double positionY) {
+        this.positionY = positionY;
+    }
+
+    public double getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(double velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public double getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public double getAnchorX() {
+        return anchorX;
+    }
+
+    public void setAnchorX(double anchorX) {
+        this.anchorX = anchorX;
+    }
+
+    public double getAnchorY() {
+        return anchorY;
+    }
+
+    public void setAnchorY(double anchorY) {
+        this.anchorY = anchorY;
+    }
+
+    public double getDisplacementX() {
+        return displacementX;
+    }
+
+    public void setDisplacementX(double displacementX) {
+        this.displacementX = displacementX;
+    }
+
+    public double getDisplacementY() {
+        return displacementY;
+    }
+
+    public void setDisplacementY(double displacementY) {
+        this.displacementY = displacementY;
+    }
+
+    public double getSpringForceX() {
+        return springForceX;
+    }
+
+    public void setSpringForceX(double springForceX) {
+        this.springForceX = springForceX;
+    }
+
+    public double getSpringForceY() {
+        return springForceY;
+    }
+
+    public void setSpringForceY(double springForceY) {
+        this.springForceY = springForceY;
+    }
+
+    public double getDampingForceX() {
+        return dampingForceX;
+    }
+
+    public void setDampingForceX(double dampingForceX) {
+        this.dampingForceX = dampingForceX;
+    }
+
+    public double getDampingForceY() {
+        return dampingForceY;
+    }
+
+    public void setDampingForceY(double dampingForceY) {
+        this.dampingForceY = dampingForceY;
+    }
+
+    public double getForceX() {
+        return forceX;
+    }
+
+    public void setForceX(double forceX) {
+        this.forceX = forceX;
+    }
+
+    public double getForceY() {
+        return forceY;
+    }
+
+    public void setForceY(double forceY) {
+        this.forceY = forceY;
+    }
+
+    public double getAccelerationX() {
+        return accelerationX;
+    }
+
+    public void setAccelerationX(double accelerationX) {
+        this.accelerationX = accelerationX;
+    }
+
+    public double getAccelerationY() {
+        return accelerationY;
+    }
+
+    public void setAccelerationY(double accelerationY) {
+        this.accelerationY = accelerationY;
+    }
 }
