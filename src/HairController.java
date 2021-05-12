@@ -56,7 +56,7 @@ public class HairController extends JApplet
             for( int i = 0; i < hairs.length; i++ )
             {
                 double[] randomCoordinates = randomCoordinates();
-                hairs[i] = new Hair( gravity, mass, timeStep, damping, k, randomCoordinates[0], randomCoordinates[1] - 10, 7 );
+                hairs[i] = new Hair( gravity, mass, timeStep, damping, k, randomCoordinates[0], randomCoordinates[1], 7 );
             }
         }
         
@@ -66,7 +66,7 @@ public class HairController extends JApplet
             double r = getRandomNumber( 0d, 1d );
             
             double x = headWidth * Math.sqrt( r ) * Math.cos( theta ) / 2;
-            double y = headHeight * Math.sqrt( r ) * Math.sin( theta ) / 2;
+            double y = ( headHeight * Math.sqrt( r ) * Math.sin( theta ) / 2 ) - 10;
             
             return new double[]{ headX + ( headWidth / 2.0 ) * 0.95 + x, headY + ( headHeight / 2.0 ) * 0.95 + y };
         }
