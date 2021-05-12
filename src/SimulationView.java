@@ -29,7 +29,7 @@ public class SimulationView extends JApplet
     {
         private HairController hairController = new HairController(
                 new World(9.8, 30.0, 0.02, 15, 5),
-                200, 10, 400, 400, 500);
+                ( SimulationView.WIDTH / 2 ) - 112, 10, 225, 250, 5000);
 
         public HairPanel()
         {

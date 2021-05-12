@@ -46,14 +46,14 @@ public class Hair {
             g2D.setColor( hairColor );
 
             if( i == 0 )
-                line = new Line2D.Double( segments[i].getPositionX() + 10,
+                line = new Line2D.Double( segments[i].getPositionX(),
                         segments[i].getPositionY(),
-                        anchorX + 10,
-                        anchorY + 25 );
+                        anchorX + 7,
+                        anchorY + 15 );
             else
-                line = new Line2D.Double( segments[i].getPositionX() + 10,
+                line = new Line2D.Double( segments[i].getPositionX(),
                         segments[i].getPositionY(),
-                        segments[i - 1].getPositionX() + 10,
+                        segments[i - 1].getPositionX(),
                         segments[i - 1].getPositionY() );
 
 
