@@ -1,4 +1,4 @@
-public class Spring
+public class Segment
 {
     private double positionX;   // spring position x
     private double positionY;   // spring position y
@@ -19,7 +19,7 @@ public class Spring
     private double forceX, forceY;                  // The net Force
     private double accelerationX, accelerationY;    // Acceleration
     
-    public Spring( double G, double M, double ts, double d, int K, double aX, double aY )
+    public Segment( double G, double M, double ts, double d, int K, double aX, double aY )
     {
         positionX = 150;
         positionY = 200;
@@ -35,17 +35,17 @@ public class Spring
         anchorY = aY;
     }
     
-    public void setDisplacement( Spring spring )
+    public void setDisplacement( Segment segment )
     {
-        if( spring == null )
+        if( segment == null )
         {
             displacementX = positionX - anchorX;
             displacementY = positionY - anchorY;
         }
         else
         {
-            displacementX = positionX - spring.positionX;
-            displacementY = positionY - spring.positionY;
+            displacementX = positionX - segment.positionX;
+            displacementY = positionY - segment.positionY;
         }
     }
     
@@ -61,17 +61,17 @@ public class Spring
         dampingForceY = damping * velocityY;
     }
     
-    public void setForce( Spring spring )
+    public void setForce( Segment segment )
     {
-        if( spring == null )
+        if( segment == null )
         {
             forceX = springForceX - dampingForceX;
             forceY = springForceY + mass * gravity - dampingForceY;
         }
         else
         {
-            forceX = springForceX - dampingForceX - spring.springForceX + spring.dampingForceX;
-            forceY = springForceY + mass * gravity - dampingForceY - spring.springForceX + spring.dampingForceX;
+            forceX = springForceX - dampingForceX - segment.springForceX + segment.dampingForceX;
+            forceY = springForceY + mass * gravity - dampingForceY - segment.springForceX + segment.dampingForceX;
         }
     }
     
@@ -103,12 +103,12 @@ public class Spring
         return positionY;
     }
     
-    public void update( Spring prevSpring, Spring nextSpring )
+    public void update( Segment prevSegment, Segment nextSegment )
     {
-        setDisplacement( prevSpring );
+        setDisplacement( prevSegment );
         setSpringForce();
         setDampingForce();
-        setForce( nextSpring );
+        setForce( nextSegment );
         setAcceleration();
         setVelocity();
         setPosition();

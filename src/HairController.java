@@ -35,12 +35,12 @@ public class HairController extends JApplet
         double gravity = 9.8;   // the gravitational force
         double mass = 30.0;     // the mass of the spring
         double timeStep = 0.02; // pixels to skip
-        double damping = 10;     // the damping coefficient
+        double damping = 10;    // the damping coefficient
         int k = 5;              // the spring constant - stiffness
         
-        Spring spring = new Spring( gravity, mass, timeStep, damping, k, anchorX, anchorY );
-        Spring spring2 = new Spring( gravity, mass, timeStep, damping, k, spring.getPositionX(), spring.getPositionY() );
-        Spring spring3 = new Spring( gravity, mass, timeStep, damping, k, spring2.getPositionX(), spring2.getPositionY() );
+        Segment segment = new Segment( gravity, mass, timeStep, damping, k, anchorX, anchorY );
+        Segment segment2 = new Segment( gravity, mass, timeStep, damping, k, segment.getPositionX(), segment.getPositionY() );
+        Segment segment3 = new Segment( gravity, mass, timeStep, damping, k, segment2.getPositionX(), segment2.getPositionY() );
         
         public HairPanel()
         {
@@ -60,27 +60,27 @@ public class HairController extends JApplet
             g2D.setRenderingHints( rh );
             g.setColor( Color.BLACK );
             
-            spring.update( null, spring2 );
-            spring2.update( spring, null );
-            spring3.update( spring2, null );
+            segment.update( null, segment2 );
+            segment2.update( segment, null );
+            segment3.update( segment2, null );
             
             g2D.fillRect( anchorX + 5, anchorX - 5, 10, 10 );
             
             // Draw Mass 1
-            Line2D line1 = new Line2D.Double( spring.getPositionX() + 10, spring.getPositionY(), anchorX + 10, anchorY + 25 );
-            Ellipse2D ellipse1 = new Ellipse2D.Double( spring.getPositionX(), spring.getPositionY(), 20, 20 );
+            Line2D line1 = new Line2D.Double( segment.getPositionX() + 10, segment.getPositionY(), anchorX + 10, anchorY + 25 );
+            Ellipse2D ellipse1 = new Ellipse2D.Double( segment.getPositionX(), segment.getPositionY(), 20, 20 );
             g2D.draw( line1 );
             g2D.draw( ellipse1 );
     
             // Draw Mass 2
-            Line2D line2 = new Line2D.Double( spring2.getPositionX() + 10, spring2.getPositionY(), spring.getPositionX() + 10, spring.getPositionY() + 20 );
-            Ellipse2D ellipse2 = new Ellipse2D.Double( spring2.getPositionX(), spring2.getPositionY(), 20, 20 );
+            Line2D line2 = new Line2D.Double( segment2.getPositionX() + 10, segment2.getPositionY(), segment.getPositionX() + 10, segment.getPositionY() + 20 );
+            Ellipse2D ellipse2 = new Ellipse2D.Double( segment2.getPositionX(), segment2.getPositionY(), 20, 20 );
             g2D.draw( line2 );
             g2D.draw( ellipse2 );
     
             // Draw Mass 3
-            Line2D line3 = new Line2D.Double( spring3.getPositionX() + 10, spring3.getPositionY(), spring2.getPositionX() + 10, spring2.getPositionY() + 20 );
-            Ellipse2D ellipse3 = new Ellipse2D.Double( spring3.getPositionX(), spring3.getPositionY(), 20, 20 );
+            Line2D line3 = new Line2D.Double( segment3.getPositionX() + 10, segment3.getPositionY(), segment2.getPositionX() + 10, segment2.getPositionY() + 20 );
+            Ellipse2D ellipse3 = new Ellipse2D.Double( segment3.getPositionX(), segment3.getPositionY(), 20, 20 );
             g2D.draw( line3 );
             g2D.draw( ellipse3 );
         }
