@@ -12,7 +12,7 @@ public class Hair {
     private Color hairColor;    // the color of the hair
     private Segment[] segments; // the segments array used to create hair
     private int numOfSegments;  // the number of hair segments
-    
+
     /**
      * Instantiates a new Hair.
      *
@@ -70,8 +70,8 @@ public class Hair {
             if( i == 0 )
                 line = new Line2D.Double( segments[i].getPositionX(),
                         segments[i].getPositionY(),
-                        anchorX + 7,
-                        anchorY + 15 );
+                        anchorX,
+                        anchorY);
             else
                 line = new Line2D.Double( segments[i].getPositionX(),
                         segments[i].getPositionY(),
@@ -82,7 +82,7 @@ public class Hair {
             g2D.draw( line );
         }
     }
-    
+
     /**
      * Gets a random number.
      *
@@ -94,7 +94,7 @@ public class Hair {
     {
         return min + ( max - min ) * new Random().nextDouble();
     }
-    
+
     /**
      * Gets the world.
      *
@@ -103,7 +103,7 @@ public class Hair {
     public World getWorld() {
         return world;
     }
-    
+
     /**
      * Sets the world.
      *
@@ -112,7 +112,7 @@ public class Hair {
     public void setWorld(World world) {
         this.world = world;
     }
-    
+
     /**
      * Gets anchor x.
      *
@@ -121,7 +121,7 @@ public class Hair {
     public double getAnchorX() {
         return anchorX;
     }
-    
+
     /**
      * Sets anchor x.
      *
@@ -130,7 +130,7 @@ public class Hair {
     public void setAnchorX(double anchorX) {
         this.anchorX = anchorX;
     }
-    
+
     /**
      * Gets anchor y.
      *
@@ -139,7 +139,7 @@ public class Hair {
     public double getAnchorY() {
         return anchorY;
     }
-    
+
     /**
      * Sets anchor y.
      *
@@ -148,7 +148,7 @@ public class Hair {
     public void setAnchorY(double anchorY) {
         this.anchorY = anchorY;
     }
-    
+
     /**
      * Gets hair color.
      *
@@ -157,7 +157,7 @@ public class Hair {
     public Color getHairColor() {
         return hairColor;
     }
-    
+
     /**
      * Sets hair color.
      *
@@ -166,7 +166,7 @@ public class Hair {
     public void setHairColor(Color hairColor) {
         this.hairColor = hairColor;
     }
-    
+
     /**
      * Get segments.
      *
@@ -175,7 +175,7 @@ public class Hair {
     public Segment[] getSegments() {
         return segments;
     }
-    
+
     /**
      * Sets segments.
      *
@@ -184,7 +184,7 @@ public class Hair {
     public void setSegments(Segment[] segments) {
         this.segments = segments;
     }
-    
+
     /**
      * Gets the number of segments.
      *
@@ -193,7 +193,7 @@ public class Hair {
     public int getNumOfSegments() {
         return numOfSegments;
     }
-    
+
     /**
      * Sets the number of segments.
      *
