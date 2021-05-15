@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
 
 public class CirclePane extends JPanel {
+    private final int FRAME_WIDTH = 1000;
+    private final int FRAME_HEIGHT = 800;
+
     private HairController hairController = new HairController(
             new World(9.8, 5.0, 0.1, 15, 5),
-            200, 200, 200, 200, 500);
+            FRAME_WIDTH / 2 - 100, 50, 200, 200, 500);
 
     private Point p = new Point(100, 100);
 
@@ -32,7 +34,7 @@ public class CirclePane extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(800, 1200);
+        return new Dimension(FRAME_WIDTH, FRAME_HEIGHT);
     }
 
     @Override
