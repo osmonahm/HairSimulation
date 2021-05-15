@@ -6,7 +6,7 @@ import java.awt.geom.Ellipse2D;
 
 public class CirclePane extends JPanel {
     private HairController hairController = new HairController(
-            new World(9.8, 30.0, 0.1, 15, 5),
+            new World(9.8, 5.0, 0.1, 15, 5),
             200, 200, 200, 200, 500);
 
     private Point p = new Point(100, 100);
@@ -18,12 +18,11 @@ public class CirclePane extends JPanel {
                 Point previousPoint = new Point(p.x, p.y);
                 p = e.getPoint();
                 for( Hair hair : hairController.getHair() ) {
-//                    hair.setAnchorX(p.x - (previousPoint.x - hair.getAnchorX()));
-//                    hair.setAnchorY(p.y - (previousPoint.y - hair.getAnchorY()));
                     Segment firstSegment = hair.getSegments()[0];
+                    hair.setAnchorX(p.x - (previousPoint.x - firstSegment.getPositionX()));
+                    hair.setAnchorY(p.y - (previousPoint.y - firstSegment.getPositionY()));
                     firstSegment.setPositionX(p.x - (previousPoint.x - firstSegment.getPositionX()));
                     firstSegment.setPositionY(p.y - (previousPoint.y - firstSegment.getPositionY()));
-//                    hair.getSegments()[1].update(hair.getSegments()[0], hair.getSegments()[2]);
                 }
                 repaint();
             }
@@ -33,7 +32,7 @@ public class CirclePane extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(800, 800);
+        return new Dimension(800, 1200);
     }
 
     @Override
@@ -43,14 +42,6 @@ public class CirclePane extends JPanel {
         RenderingHints rh = new RenderingHints( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
         rh.put( RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
         g2d.setRenderingHints( rh );
-
-        g2d.setColor( Color.BLACK );
-        Ellipse2D head = new Ellipse2D.Double( p.x - hairController.getHeadWidth() / 2.0,
-                p.y - hairController.getHeadHeight() / 2.0,
-                hairController.getHeadWidth(),
-                hairController.getHeadHeight() );
-
-        g2d.draw( head );
 
         for( Hair hair : hairController.getHair() ) {
             hair.drawHair( g2d );

@@ -1,12 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
-
 public class SimulationView
 {
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 1200;
-
     public static void main(String[] args) {
         new SimulationView();
     }

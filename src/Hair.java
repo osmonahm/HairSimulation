@@ -62,22 +62,15 @@ public class Hair {
      * @param g2D the drawing graphics component
      */
     public void drawHair( Graphics2D g2D ) {
-        for (int i = 0; i < segments.length; i++) {
+        for (int i = 1; i < segments.length; i++) {
             updateSegments();
             Line2D line;
             g2D.setColor( hairColor );
 
-            if( i == 0 )
-                line = new Line2D.Double( segments[i].getPositionX(),
-                        segments[i].getPositionY(),
-                        anchorX,
-                        anchorY);
-            else
-                line = new Line2D.Double( segments[i].getPositionX(),
-                        segments[i].getPositionY(),
-                        segments[i - 1].getPositionX(),
-                        segments[i - 1].getPositionY() );
-
+            line = new Line2D.Double( segments[i].getPositionX(),
+                    segments[i].getPositionY(),
+                    segments[i - 1].getPositionX(),
+                    segments[i - 1].getPositionY() );
 
             g2D.draw( line );
         }
