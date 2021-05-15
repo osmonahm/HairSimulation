@@ -26,8 +26,8 @@ public class Segment {
      * @param anchorY the anchor y coordinate
      */
     public Segment(World world, double anchorX, double anchorY) {
-        positionX = 150;
-        positionY = 200;
+        positionX = 0;
+        positionY = 0;
         velocityX = 0.0;
         velocityY = 0.0;
         

@@ -62,7 +62,7 @@ public class HairController
         for( int i = 0; i < hair.length; i++ )
         {
             double[] randomCoordinates = randomCoordinates();
-            this.hair[i] = new Hair(world, randomCoordinates[0], randomCoordinates[1], 7 );
+            this.hair[i] = new Hair(world, randomCoordinates[0], randomCoordinates[1], 40 );
         }
 
         return hair;
